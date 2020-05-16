@@ -25,6 +25,7 @@ selectJobRole.addEventListener("change", () => {
 });
 
 // Creates "select theme" option in design drop down menu.  Hides or shows color menu and options depending on user selections.
+
 const selectTheme = document.getElementById("design");
 const selectThemeOptions = document.getElementById("design").options;
 selectThemeOptions[0].style.display = "none";
