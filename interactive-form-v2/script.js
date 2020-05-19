@@ -106,15 +106,13 @@ activityContainer[0].addEventListener("change", (e) => {
 // Hides or shows payment options and/or input fields depending on user selections.
 
 const paymentMethod = document.getElementById("payment");
-paymentMethod[0].hidden = true;
 const ccInfo = document.getElementById("credit-card");
 const payPal = document.getElementById("paypal");
 const bitcoin = document.getElementById("bitcoin");
 payPal.hidden = true;
 bitcoin.hidden = true;
-paymentMethod[1].selected = false;
-paymentMethod[2].selected = false;
-paymentMethod[3].selected = false;
+paymentMethod[1].selected = true;
+paymentMethod[0].hidden = true;
 
 paymentMethod.addEventListener("change", (e) => {
   eventTarget = e.target.value;
