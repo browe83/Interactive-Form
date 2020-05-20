@@ -182,15 +182,14 @@ const activitiesValidator = () => {
     if (activitiesCheckboxes[i].checked) {
       document.getElementById("acitivities-error-msg").textContent = "";
       return true;
-    } else {
-      displayErrorMsg(
-        "acitivities-error-msg",
-        "Please select 1 or more activities",
-        activityContainer[0]
-      );
-      return false;
     }
   }
+  displayErrorMsg(
+    "acitivities-error-msg",
+    "Please select 1 or more activities",
+    activityContainer[0]
+  );
+  return false;
 };
 
 const ccInput = document.getElementById("cc-num");
