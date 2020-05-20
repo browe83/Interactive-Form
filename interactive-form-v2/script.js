@@ -157,7 +157,7 @@ const nameValidator = (e) => {
 };
 
 nameInput.addEventListener("blur", nameValidator);
-nameInput.addEventListener("keydown", nameValidator);
+nameInput.addEventListener("input", nameValidator);
 
 const email = document.getElementById("mail");
 const emailValidator = () => {
@@ -175,7 +175,7 @@ const emailValidator = () => {
 };
 
 email.addEventListener("blur", emailValidator);
-email.addEventListener("keydown", emailValidator);
+email.addEventListener("input", emailValidator);
 
 const activitiesValidator = () => {
   for (let i = 0; i < activitiesCheckboxes.length; i++) {
@@ -293,7 +293,7 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
   }
 
-  if (paymentMethod[1].selected || paymentMethod[0].selected) {
+  if (paymentMethod[1].selected) {
     if (!ccNumValidator()) {
       e.preventDefault();
     }
