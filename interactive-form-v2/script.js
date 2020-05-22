@@ -140,10 +140,9 @@ const displayErrorMsg = (divId, errorMsg, target) => {
   target.parentNode.insertBefore(errorDiv, target);
   document.getElementById(divId).textContent = errorMsg;
 };
-const textRegex = /^[\w\d]+$/;
 
 const nameValidator = () => {
-  if (textRegex.test(nameInput.value)) {
+  if (nameInput.value.length > 0) {
     nameInput.style.borderColor = "#5e97b0";
     displayErrorMsg("name-error-msg", "", nameInput);
     return true;
