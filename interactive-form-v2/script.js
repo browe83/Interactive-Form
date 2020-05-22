@@ -142,7 +142,8 @@ const displayErrorMsg = (divId, errorMsg, target) => {
 };
 
 const nameValidator = () => {
-  if (nameInput.value.length > 0) {
+  const nameRegex = /^\s?[\w\d]+\s?$|^\s?[\w\d]+\s?[\w\d]+\s?$|^\s?[\w\d]+\s?[\w\d]+\s?[\w\d]+\s?$/;
+  if (nameInput.value.length !== 0 && nameRegex.test(nameInput.value)) {
     nameInput.style.borderColor = "#5e97b0";
     displayErrorMsg("name-error-msg", "", nameInput);
     return true;
