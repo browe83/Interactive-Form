@@ -134,20 +134,18 @@ paymentMethod.addEventListener("change", (e) => {
 
 // Validates user input and provides user with appropriate error messages.
 const displayErrorMsg = (divId, errorMsg, target) => {
-  if (document.getElementById(divId) === null) {
-    const errorDiv = document.createElement("div");
-    errorDiv.classList.add("error");
-    errorDiv.id = divId;
-    target.parentNode.insertBefore(errorDiv, target);
-  }
+  const errorDiv = document.createElement("div");
+  errorDiv.classList.add("error");
+  errorDiv.id = divId;
+  target.parentNode.insertBefore(errorDiv, target);
   document.getElementById(divId).textContent = errorMsg;
 };
-const nameValidator = (e) => {
-  const nameInputValue = nameInput.value;
+const textRegex = /^[\w\d]+$/;
 
-  if (nameInputValue.length > 0) {
+const nameValidator = () => {
+  if (textRegex.test(nameInput.value)) {
     nameInput.style.borderColor = "#5e97b0";
-    document.getElementById("name-error-msg").textContent = "";
+    displayErrorMsg("name-error-msg", "", nameInput);
     return true;
   } else {
     displayErrorMsg("name-error-msg", "Please enter a valid name", nameInput);
@@ -155,16 +153,14 @@ const nameValidator = (e) => {
     return false;
   }
 };
-
-nameInput.addEventListener("blur", nameValidator);
+nameValidator();
 nameInput.addEventListener("input", nameValidator);
 
 const email = document.getElementById("mail");
 const emailValidator = () => {
-  const emailValue = email.value;
   const emailRegex = /^[^@]+@[^@.]+\.[a-z]{2,3}$/i;
-  if (emailRegex.test(emailValue)) {
-    document.getElementById("email-error-msg").textContent = "";
+  if (emailRegex.test(email.value)) {
+    displayErrorMsg("email-error-msg", "", email);
     email.style.borderColor = "#5e97b0";
     return true;
   } else {
@@ -174,13 +170,13 @@ const emailValidator = () => {
   }
 };
 
-email.addEventListener("blur", emailValidator);
+emailValidator();
 email.addEventListener("input", emailValidator);
 
 const activitiesValidator = () => {
   for (let i = 0; i < activitiesCheckboxes.length; i++) {
     if (activitiesCheckboxes[i].checked) {
-      document.getElementById("acitivities-error-msg").textContent = "";
+      displayErrorMsg("acitivities-error-msg", "", activityContainer[0]);
       return true;
     }
   }
@@ -191,6 +187,8 @@ const activitiesValidator = () => {
   );
   return false;
 };
+activitiesValidator();
+activityContainer[0].addEventListener("change", activitiesValidator);
 
 const ccInput = document.getElementById("cc-num");
 const ccNumValidator = () => {
@@ -200,10 +198,9 @@ const ccNumValidator = () => {
   const ccNumRegex3 = /\d{17,}/;
   if (ccNumRegex.test(ccInputValue)) {
     ccInput.style.borderColor = "#5e97b0";
-    document.getElementById("ccNum-error-msg").textContent = "";
+    displayErrorMsg("ccNum-error-msg", "", ccInput);
     return true;
-  }
-  if (ccNumRegex2.test(ccInputValue) || ccNumRegex3.test(ccInputValue)) {
+  } else if (ccNumRegex2.test(ccInputValue) || ccNumRegex3.test(ccInputValue)) {
     displayErrorMsg(
       "ccNum-error-msg",
       "Please enter a number that is between 13 and 16 digits long",
@@ -222,7 +219,8 @@ const ccNumValidator = () => {
   }
 };
 
-ccInput.addEventListener("blur", ccNumValidator);
+ccNumValidator();
+ccInput.addEventListener("input", ccNumValidator);
 
 const ccZipCode = document.getElementById("zip");
 const ccZipValidator = () => {
@@ -231,7 +229,7 @@ const ccZipValidator = () => {
   const ccZipRegex2 = /^\d{1,4}$/;
   const ccZipRegex3 = /\d{6,}/;
   if (ccZipRegex1.test(ccZipValue)) {
-    document.getElementById("zip-error-msg").textContent = "";
+    displayErrorMsg("zip-error-msg", "", ccZipCode);
     ccZipCode.style.borderColor = "#5e97b0";
     return true;
   } else if (ccZipRegex2.test(ccZipValue) || ccZipRegex3.test(ccZipValue)) {
@@ -253,7 +251,8 @@ const ccZipValidator = () => {
   }
 };
 
-ccZipCode.addEventListener("blur", ccZipValidator);
+ccZipValidator();
+ccZipCode.addEventListener("input", ccZipValidator);
 
 const cvvNum = document.getElementById("cvv");
 const cvvNumValidator = () => {
@@ -262,7 +261,7 @@ const cvvNumValidator = () => {
   const cvvRegex2 = /^\d{1,2}$/;
   const cvvRegex3 = /\d{4,}/;
   if (cvvRegex.test(cvvNumValue)) {
-    document.getElementById("cvv-error-msg").textContent = "";
+    displayErrorMsg("cvv-error-msg", "", cvvNum);
     cvvNum.style.borderColor = "#5e97b0";
     return true;
   } else if (cvvRegex2.test(cvvNumValue) || cvvRegex3.test(cvvNumValue)) {
@@ -280,7 +279,8 @@ const cvvNumValidator = () => {
   }
 };
 
-cvvNum.addEventListener("blur", cvvNumValidator);
+cvvNumValidator();
+cvvNum.addEventListener("input", cvvNumValidator);
 
 form.addEventListener("submit", (e) => {
   if (!nameValidator()) {
