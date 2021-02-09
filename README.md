@@ -11,5 +11,9 @@ This project enhances an interactive registration form for a fictional conferenc
 * GitHub
 
 ## Installation
-After cloning repository, locate and open the index.html file to launch the app.
+```shell
+$ git clone https://github.com/browe83/List-Pagination-and-Filtering.git
+$ cd List-Pagination-and-Filtering
+$ open index.html
+```
 
